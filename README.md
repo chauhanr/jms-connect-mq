@@ -1,1 +1,1 @@
-# jms-connect-mq
+# JMS Connect MQ

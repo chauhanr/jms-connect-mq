@@ -23,8 +23,13 @@ public class ReceiveEnricher implements Transformer{
 	public String transform(String message) {
 		
 		try {
-		   Employee emp = marshaller.unmarshallXml(message); 
-		   logger.info("Successfully unmarshalled xml file Emp: {}", emp.toString());
+		   Object obj = marshaller.unmarshallXml(message); 
+		   if ( obj instanceof Employee) {
+			  Employee emp = (Employee) obj; 
+			  logger.info("Successfully unmarshalled xml file Emp: {}", emp.toString());
+		   }else {
+			  logger.info("Unknow model obj: {}", obj.toString());
+		   }   
 		}catch(JAXBException exp) {
 		   logger.info("Error marshalling xml message {} ", exp.getMessage());
 		   return "";
